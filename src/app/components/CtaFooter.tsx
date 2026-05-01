@@ -189,10 +189,16 @@ export default function CtaFooter() {
               { label: 'Privacy', href: '#' },
               { label: 'Admissions', href: '#courses' },
               { label: 'Contact', href: '#contact' },
+              {
+                label: 'Instagram',
+                href: 'https://www.instagram.com/drvishalsaxenacommerceclasses/',
+              },
             ]?.map((link) => (
               <a
                 key={link?.label}
                 href={link?.href}
+                target={link?.href?.startsWith('http') ? '_blank' : undefined}
+                rel={link?.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
                 className="font-body font-medium text-white/40 hover:text-white/80 transition-colors text-xs tracking-wide"
               >
                 {link?.label}
