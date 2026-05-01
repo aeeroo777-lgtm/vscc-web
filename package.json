@@ -46,25 +46,33 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,md,json}\"",
     "serve": "next start",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
     "@dhiwise/component-tagger": "^1.0.15",
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
+    "@prisma/client": "^5.22.0",
+    "bcryptjs": "^2.4.3",
     "hls.js": "^1.6.15",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.462.0",
     "motion": "^12.35.0",
     "next": "15.1.11",
     "react": "19.0.3",
     "react-dom": "19.0.3",
-    "recharts": "^2.15.2"
+    "recharts": "^2.15.2",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@netlify/plugin-nextjs": "^5.11.1",
     "@types/node": "^20",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/react": "19.0.3",
     "@types/react-dom": "19.0.3",
     "@typescript-eslint/eslint-plugin": "^8.29.0",
@@ -76,6 +84,7 @@
     "eslint-plugin-prettier": "^5.2.6",
     "postcss": "8.4.8",
     "prettier": "^3.5.3",
+    "prisma": "^5.22.0",
     "tailwindcss": "3.4.6",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5"

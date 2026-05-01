@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ArrowUpRight, Play, Star } from 'lucide-react';
+import { ArrowUpRight, Star } from 'lucide-react';
 import BlurText from './BlurText';
 
 const programs = [
@@ -112,7 +112,7 @@ export default function Hero() {
           career-focused learning.
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -126,12 +126,6 @@ export default function Hero() {
             Book a Free Counseling Session
             <ArrowUpRight size={15} strokeWidth={2} />
           </a>
-          <button className="inline-flex items-center gap-2 text-sm font-body font-medium text-white/70 hover:text-white transition-colors group">
-            <span className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white/40 transition-colors">
-              <Play size={12} fill="currentColor" />
-            </span>
-            Watch Campus Tour
-          </button>
         </motion.div>
 
         {/* Trust Bar */}

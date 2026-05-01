@@ -9,6 +9,52 @@ import SectionReveal from './SectionReveal';
 
 export default function CtaFooter() {
   const [year] = useState(() => new Date()?.getFullYear());
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [interest, setInterest] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName,
+          email,
+          phone,
+          interest: interest || undefined,
+          message: message || undefined,
+        }),
+      });
+
+      const result = await response.json();
+      if (!response.ok || !result?.ok) {
+        setSubmitMessage('Unable to submit right now. Please try again.');
+        return;
+      }
+
+      setSubmitMessage('Thanks! We received your request and will contact you soon.');
+      setFullName('');
+      setEmail('');
+      setPhone('');
+      setInterest('');
+      setMessage('');
+    } catch {
+      setSubmitMessage('Unable to submit right now. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <section
@@ -61,21 +107,64 @@ export default function CtaFooter() {
         </SectionReveal>
 
         <SectionReveal delay={0.5}>
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <a
-              href="mailto:info@vscc.in"
-              className="liquid-glass-strong rounded-full px-7 py-3 text-sm font-body font-medium text-white inline-flex items-center gap-2"
-            >
-              Book Counseling
-              <ArrowUpRight size={15} strokeWidth={2} />
-            </a>
-            <a
-              href="#courses"
-              className="bg-white text-black rounded-full px-7 py-3 text-sm font-body font-semibold hover:bg-white/90 transition-all inline-flex items-center gap-2"
-            >
-              View Courses
-            </a>
-          </div>
+          <form onSubmit={handleSubmit} className="w-full max-w-3xl px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <input
+                value={fullName}
+                onChange={(event) => setFullName(event.target.value)}
+                required
+                placeholder="Full name"
+                className="rounded-full px-4 py-3 text-sm bg-white/10 border border-white/20 text-white placeholder:text-white/50 outline-none focus:border-white/40"
+              />
+              <input
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+                type="email"
+                placeholder="Email"
+                className="rounded-full px-4 py-3 text-sm bg-white/10 border border-white/20 text-white placeholder:text-white/50 outline-none focus:border-white/40"
+              />
+              <input
+                value={phone}
+                onChange={(event) => setPhone(event.target.value)}
+                required
+                placeholder="Phone number"
+                className="rounded-full px-4 py-3 text-sm bg-white/10 border border-white/20 text-white placeholder:text-white/50 outline-none focus:border-white/40"
+              />
+              <input
+                value={interest}
+                onChange={(event) => setInterest(event.target.value)}
+                placeholder="Course interest (optional)"
+                className="rounded-full px-4 py-3 text-sm bg-white/10 border border-white/20 text-white placeholder:text-white/50 outline-none focus:border-white/40"
+              />
+              <textarea
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+                placeholder="Message (optional)"
+                rows={3}
+                className="md:col-span-2 rounded-2xl px-4 py-3 text-sm bg-white/10 border border-white/20 text-white placeholder:text-white/50 outline-none focus:border-white/40"
+              />
+            </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-5">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="liquid-glass-strong rounded-full px-7 py-3 text-sm font-body font-medium text-white inline-flex items-center gap-2 disabled:opacity-70"
+              >
+                {isSubmitting ? 'Submitting...' : 'Book Counseling'}
+                <ArrowUpRight size={15} strokeWidth={2} />
+              </button>
+              <a
+                href="#courses"
+                className="bg-white text-black rounded-full px-7 py-3 text-sm font-body font-semibold hover:bg-white/90 transition-all inline-flex items-center gap-2"
+              >
+                View Courses
+              </a>
+            </div>
+            {submitMessage ? (
+              <p className="mt-3 text-xs text-white/80">{submitMessage}</p>
+            ) : null}
+          </form>
         </SectionReveal>
       </div>
       {/* Footer Bar */}
