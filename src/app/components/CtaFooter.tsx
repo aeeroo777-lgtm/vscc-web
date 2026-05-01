@@ -1,13 +1,16 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Instagram, MessageCircle } from 'lucide-react';
 import HlsVideo from './HlsVideo';
 import BlurText from './BlurText';
 import SectionReveal from './SectionReveal';
 
 
 export default function CtaFooter() {
+  const phoneNumberDisplay = '092355 55505';
+  const phoneNumberIntl = '919235555505';
+
   const [year] = useState(() => new Date()?.getFullYear());
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -104,6 +107,32 @@ export default function CtaFooter() {
             discover the right academic path for your goals — CA, CFA, ACCA,
             B.Com, or Board excellence.
           </p>
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
+            <a
+              href="https://www.instagram.com/drvishalsaxenacommerceclasses/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="liquid-glass rounded-full px-4 py-2 text-xs font-body font-medium text-white inline-flex items-center gap-2 border border-white/20 hover:border-white/40 transition-colors"
+            >
+              <Instagram size={14} />
+              Instagram
+            </a>
+            <a
+              href={`https://wa.me/${phoneNumberIntl}?text=Hi%20VSCC%2C%20I%20want%20to%20book%20a%20counseling%20session.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="liquid-glass rounded-full px-4 py-2 text-xs font-body font-medium text-white inline-flex items-center gap-2 border border-white/20 hover:border-white/40 transition-colors"
+            >
+              <MessageCircle size={14} />
+              WhatsApp
+            </a>
+            <a
+              href={`tel:+${phoneNumberIntl}`}
+              className="liquid-glass rounded-full px-4 py-2 text-xs font-body font-medium text-white inline-flex items-center gap-2 border border-white/20 hover:border-white/40 transition-colors"
+            >
+              Call {phoneNumberDisplay}
+            </a>
+          </div>
         </SectionReveal>
 
         <SectionReveal delay={0.5}>
@@ -192,6 +221,14 @@ export default function CtaFooter() {
               {
                 label: 'Instagram',
                 href: 'https://www.instagram.com/drvishalsaxenacommerceclasses/',
+              },
+              {
+                label: 'WhatsApp',
+                href: `https://wa.me/${phoneNumberIntl}?text=Hi%20VSCC%2C%20I%20want%20to%20book%20a%20counseling%20session.`,
+              },
+              {
+                label: `Call ${phoneNumberDisplay}`,
+                href: `tel:+${phoneNumberIntl}`,
               },
             ]?.map((link) => (
               <a
